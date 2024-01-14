@@ -3,6 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'
+import { HomeModule } from './modules/home/home.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './modules/shared/shared.module';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [
@@ -10,7 +15,13 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    HomeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    LazyLoadImageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

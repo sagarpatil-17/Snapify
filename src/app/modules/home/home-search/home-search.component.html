@@ -1,0 +1,34 @@
+<div class="home">
+    <header>
+        <app-nav></app-nav>
+    </header>
+    <div class="home-search">
+        <div class="px-4 lg:px-0 searchDiv">
+            <h1 class="text-2xl lg:text-3xl font-bold tracking-wider lg:leading-10">Effortlessly find and enjoy a
+                curated collection of stunning images on our innovative search platform.</h1>
+            <div class="relative my-5">
+                <form [formGroup]="searchForm">
+                    <input type="text" class="w-full px-4 py-2 text-slate-500 focus:outline-none"
+                        placeholder="Search for free photos" formControlName="userSearch" (focus)="showSuggestion(true)"
+                        (blur)="delayHideSuggestion()" [ngClass]="isSuggestionDiv ? 'rounded-t':'rounded' ">
+                    <button class="absolute inset-y-0 right-0 flex items-center px-4 cursor-pointer"
+                        [ngClass]="isSuggestionDiv ? 'border-l':'' " (click)="onSearch()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <div class="border-t rounded-b suggestionDiv" *ngIf="isSuggestionDiv">
+                        <h2 class="mb-3 text-xl font-medium">Trending Topics</h2>
+                        <div class="flex flex-wrap gap-4">
+                            <button
+                                class="text-slate-500 border rounded px-3 py-1 hover:bg-gray-50 hover:border-gray-400"
+                                *ngFor="let keyword of searchKeywords" (click)="onKeyword(keyword)"><i
+                                    class="fa-solid fa-arrow-trend-up mr-2"></i>{{keyword}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <p class="tracking-wide flex flex-wrap"><span class="text-gray-300 font-bold">Trending:</span><span
+                    class="ml-2 font-medium cursor-pointer" *ngFor="let keyword of searchKeywords"
+                    (click)="onKeyword(keyword)">{{keyword}},</span></p>
+        </div>
+    </div>
+</div>

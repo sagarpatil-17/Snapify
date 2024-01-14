@@ -1,0 +1,37 @@
+.imagesDiv {
+
+    .image-info {
+        width: 100%;
+        margin-bottom: 24px;
+        position: relative;
+
+        &:hover .download-div {
+            opacity: 1;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            cursor: zoom-in;
+            opacity: 1;
+            transition: .3s ease;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
+        .download-div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: .3s ease;
+
+            a {
+                cursor: pointer;
+            }
+        }
+    }
+}
