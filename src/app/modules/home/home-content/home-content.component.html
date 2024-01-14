@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="flex justify-between items-center my-8">
+        <h1 class="text-2xl font-semibold tracking-wide">Trending Photos</h1>
+        <select
+            class="text-base text-black font-medium px-2 py-1.5 rounded-md border-0 ring-1 ring-gray-300 focus:outline-none focus:ring-gray-500 cursor-pointer"
+            (change)="getImages($event)">
+            <option value="trending">Trending</option>
+            <option value="new">New</option>
+        </select>
+    </div>
+
+    <div *ngIf="isLoading; else imageDiv">
+        <app-skeleton-loader></app-skeleton-loader>
+    </div>
+
+    <ng-template #imageDiv>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 imagesDiv">
+            <div>
+                <div class="image-info" *ngFor="let img of page1.photos?.slice(0,5)">
+                    <img lazyLoad  [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                    <div class="download-div">
+                        <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
+                            (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="image-info" *ngFor="let img of page1.photos?.slice(5,10)">
+                    <img lazyLoad  [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                    <div class="download-div">
+                        <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
+                        (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="image-info" *ngFor="let img of page1.photos?.slice(10,15)">
+                    <img lazyLoad  [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                    <div class="download-div">
+                        <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
+                        (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 imagesDiv" *ngIf="page2">
+            <div>
+                <div class="image-info" *ngFor="let img of page2.photos?.slice(0,5)">
+                    <img lazyLoad  [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                    <div class="download-div">
+                        <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
+                            (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="image-info" *ngFor="let img of page2.photos?.slice(5,10)">
+                    <img lazyLoad [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                    <div class="download-div">
+                        <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
+                        (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="image-info" *ngFor="let img of page2.photos?.slice(10,15)">
+                    <img lazyLoad [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                    <div class="download-div">
+                        <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
+                        (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-8">
+            <button class="w-full py-4 text-lg font-medium rounded border border-gray-300 hover:border-gray-600 hover:bg-gray-50 cursor-pointer"
+                (click)="loadMore(page1.next_page)">Load more</button>
+        </div>
+    </ng-template>
+</div>
