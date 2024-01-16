@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
+
+  constructor(private router: Router) { }
+
+  public Popular_tags = ['Sports', 'Cool Photos', 'Textures', 'Black Backgrounds'];
+  public wallpaper_tags = ['HD Wallpapers', '4k Wallpapers', 'PC Wallpapers', 'Mobile Wallpapers'];
+  public other_tags = ['Happy Birthday Images', 'Cool Wallpapers', 'Travel', 'Gym'];
+
+  public onTags(tag: string) {
+    this.router.navigate([`search/${tag}`]);
+  }
 
 }

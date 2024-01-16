@@ -44,9 +44,9 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 imagesDiv" *ngIf="page2">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 imagesDiv" *ngIf="nextPage">
             <div>
-                <div class="image-info" *ngFor="let img of page2.photos?.slice(0,5)">
+                <div class="image-info" *ngFor="let img of nextPage.photos?.slice(0,5)">
                     <img lazyLoad  [src]="img.src.original" [alt]="img.alt" loading="lazy">
                     <div class="download-div">
                         <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div>
-                <div class="image-info" *ngFor="let img of page2.photos?.slice(5,10)">
+                <div class="image-info" *ngFor="let img of nextPage.photos?.slice(5,10)">
                     <img lazyLoad [src]="img.src.original" [alt]="img.alt" loading="lazy">
                     <div class="download-div">
                         <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div>
-                <div class="image-info" *ngFor="let img of page2.photos?.slice(10,15)">
+                <div class="image-info" *ngFor="let img of nextPage.photos?.slice(10,15)">
                     <img lazyLoad [src]="img.src.original" [alt]="img.alt" loading="lazy">
                     <div class="download-div">
                         <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
@@ -75,8 +75,8 @@
         </div>
 
         <div class="my-8">
-            <button class="w-full py-4 text-lg font-medium rounded border border-gray-300 hover:border-gray-600 hover:bg-gray-50 cursor-pointer"
-                (click)="loadMore(page1.next_page)">Load more</button>
+            <button class="w-full py-4 text-lg font-medium rounded border border-gray-300 hover:border-gray-600 cursor-pointer flex justify-center items-center"
+                (click)="loadMore(loadMoreUrl)"><span *ngIf="!isDotLoader">Load more</span> <div class="loader" *ngIf="isDotLoader"></div> </button>
         </div>
     </ng-template>
 </div>

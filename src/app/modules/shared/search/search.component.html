@@ -1,10 +1,20 @@
 <div class="container">
     <div class="flex justify-between items-center my-8">
-        <h1 class="text-3xl text-gray-700 font-semibold tracking-wide leading-10">Free {{searchText}} photos</h1>
-        <button class="text-lg font-medium tracking-wide px-4 py-1.5 border border-black rounded"><i
-                class="fa-solid fa-arrow-up-short-wide mr-2"></i>
-            <!-- <i class="fa-solid fa-arrow-down-wide-short"></i> -->
+        <h1 class="text-3xl font-semibold tracking-wide leading-10">Free {{searchText}} photos</h1>
+        <button
+            class="text-lg font-medium tracking-wide px-4 py-1.5 border border-gray-300 hover:border-gray-500 rounded"
+            (click)="onFilter()"><i class="fa-solid fa-arrow-up-short-wide mr-2" *ngIf="!isFilter"></i>
+            <i class="fa-solid fa-arrow-down-wide-short mr-2" *ngIf="isFilter"></i>
             Filters</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 my-8" *ngIf="isFilter">
+        <button class="text-lg font-medium tracking-wide border border-gray-300 hover:border-gray-500 py-2 rounded"
+            (click)="setFilter('original')">Original</button>
+        <button class="text-lg font-medium tracking-wide border border-gray-300 hover:border-gray-500 py-2 rounded"
+            (click)="setFilter('landscape')">Horizontal</button>
+        <button class="text-lg font-medium tracking-wide border border-gray-300 hover:border-gray-500 py-2 rounded"
+            (click)="setFilter('portrait')">Vertical</button>
     </div>
 
     <div *ngIf="isLoading; else imageDiv">
@@ -15,7 +25,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 imagesDiv">
             <div>
                 <div class="image-info" *ngFor="let img of page1.photos?.slice(0,5)">
-                    <img lazyLoad [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                    <img lazyLoad [src]="updateSrc(img,currentFilter)" [alt]="img.alt" loading="lazy">
                     <div class="download-div">
                         <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
                             (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
@@ -24,7 +34,7 @@
             </div>
             <div>
                 <div class="image-info" *ngFor="let img of page1.photos?.slice(5,10)">
-                    <img lazyLoad [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                    <img lazyLoad [src]="updateSrc(img,currentFilter)" [alt]="img.alt" loading="lazy">
                     <div class="download-div">
                         <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
                             (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
@@ -33,7 +43,7 @@
             </div>
             <div>
                 <div class="image-info" *ngFor="let img of page1.photos?.slice(10,15)">
-                    <img lazyLoad [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                    <img lazyLoad [src]="updateSrc(img,currentFilter)" [alt]="img.alt" loading="lazy">
                     <div class="download-div">
                         <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
                             (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
@@ -42,10 +52,10 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 imagesDiv" *ngIf="page2">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 imagesDiv" *ngIf="nextPage">
             <div>
-                <div class="image-info" *ngFor="let img of page2.photos?.slice(0,5)">
-                    <img lazyLoad [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                <div class="image-info" *ngFor="let img of nextPage.photos?.slice(0,5)">
+                    <img lazyLoad [src]="updateSrc(img,currentFilter)" [alt]="img.alt" loading="lazy">
                     <div class="download-div">
                         <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
                             (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
@@ -53,8 +63,8 @@
                 </div>
             </div>
             <div>
-                <div class="image-info" *ngFor="let img of page2.photos?.slice(5,10)">
-                    <img lazyLoad [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                <div class="image-info" *ngFor="let img of nextPage.photos?.slice(5,10)">
+                    <img lazyLoad [src]="updateSrc(img,currentFilter)" [alt]="img.alt" loading="lazy">
                     <div class="download-div">
                         <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
                             (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
@@ -62,8 +72,8 @@
                 </div>
             </div>
             <div>
-                <div class="image-info" *ngFor="let img of page2.photos?.slice(10,15)">
-                    <img lazyLoad [src]="img.src.original" [alt]="img.alt" loading="lazy">
+                <div class="image-info" *ngFor="let img of nextPage.photos?.slice(10,15)">
+                    <img lazyLoad [src]="updateSrc(img,currentFilter)" [alt]="img.alt" loading="lazy">
                     <div class="download-div">
                         <a class="bg-gray-200 text-slate-600 rounded border border-gray-200 px-4 py-2 hover:bg-white"
                             (click)="downloadImage(img)"><i class="fa-solid fa-arrow-down mr-2"></i>Download</a>
@@ -73,8 +83,8 @@
         </div>
 
         <div class="my-8">
-            <button class="w-full py-4 text-lg rounded border hover:border-black cursor-pointer"
-                (click)="loadMore(page1.next_page)">Load more</button>
+            <button class="w-full py-4 text-lg font-medium rounded border border-gray-300 hover:border-gray-600 cursor-pointer flex justify-center items-center"
+            (click)="loadMore(loadMoreUrl)"><span *ngIf="!isDotLoader">Load more</span> <div class="loader" *ngIf="isDotLoader"></div> </button>
         </div>
     </ng-template>
 </div>

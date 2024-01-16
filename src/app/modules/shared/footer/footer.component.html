@@ -1,3 +1,42 @@
-<div>
-    <h1>Snapify</h1>
-</div>
+<footer class="py-5">
+    <div class="container">
+        <div class="grid grid-cols-3 gap-8 lg:gap-20 mb-6">
+            <div class="col-span-3 lg:col-span-1">
+                <div class="logo mb-4">
+                    <img src="/assets/images/logo.png" alt="Logo">
+                    <h1 class="text-2xl font-medium ml-2">Snapify</h1>
+                </div>
+                <p class="text-xl font-normal text-justify">Effortlessly find and enjoy a curated collection of stunning
+                    images on
+                    our innovative search platform.</p>
+            </div>
+            <div class="col-span-3 lg:col-span-2 grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                <div>
+                    <h1 class="h-12 flex items-center text-xl font-medium mb-4">Popular</h1>
+                    <div>
+                        <p class="mb-2 text-lg cursor-pointer hover:text-slate-300" *ngFor="let popular of Popular_tags"
+                            (click)="onTags(popular)">{{popular}}</p>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="h-12 flex items-center text-xl font-medium mb-4">Wallpapers</h1>
+                    <div>
+                        <p class="mb-2 text-lg cursor-pointer hover:text-slate-300"
+                            *ngFor="let wallpaper of wallpaper_tags" (click)="onTags(wallpaper)">{{wallpaper}}</p>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="h-12 flex items-center text-xl font-medium mb-4">Others</h1>
+                    <div>
+                        <p class="mb-2 text-lg cursor-pointer hover:text-slate-300" *ngFor="let other of other_tags"
+                            (click)="onTags(other)">{{other}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t py-4">
+            <p class="text-center font-medium tracking-wide">Copyright &copy; 2024, Snapify. All Rights
+                Reserved.</p>
+        </div>
+    </div>
+</footer>

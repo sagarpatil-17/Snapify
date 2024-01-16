@@ -10,8 +10,10 @@ import { HttpClient } from '@angular/common/http';
 export class HomeContentComponent {
 
   public page1: any;
-  public page2: any;
+  public nextPage: any;
   public isLoading: boolean = false;
+  public loadMoreUrl: string;
+  public isDotLoader: boolean = false;
 
   constructor(private _sharedService: SharedService, private http: HttpClient) { }
 
@@ -25,6 +27,7 @@ export class HomeContentComponent {
     this._sharedService.getImagesData(eventVal || 'people').subscribe((res: any) => {
       console.log(res);
       this.page1 = res;
+      this.loadMoreUrl = res.next_page;
       this.isLoading = false;
     })
   }
@@ -36,8 +39,12 @@ export class HomeContentComponent {
       'Authorization': key
     }
 
-    this.http.get(url, { headers: headers }).subscribe((res) => {
-      this.page2 = res;
+    this.isDotLoader = true;
+    this.http.get(url, { headers: headers }).subscribe((res: any) => {
+      console.log(res);
+      this.nextPage = res;
+      this.loadMoreUrl = res.next_page;
+      this.isDotLoader = false;
     })
   }
 
