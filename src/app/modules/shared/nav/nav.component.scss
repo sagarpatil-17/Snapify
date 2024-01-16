@@ -1,10 +1,55 @@
-.container{
+header {
+    background: #ffffff;
+    width: 100%;
+    height: 70px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
     display: flex;
     align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 
-    img{
-        width: 48px;
-        height: 48px;
+    .logo {
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 48px;
+            height: 48px;
+        }
     }
 
+    .home-search {
+        color: #ffffff;
+        position: relative;
+        width: 50%;
+
+        i {
+            color: #bcbbbb;
+            cursor: pointer;
+
+            &:hover {
+                font-weight: 600;
+                color: orangered;
+            }
+        }
+
+        .suggestionDiv {
+            width: 100%;
+            padding: 16px;
+            background: #ffffff;
+            color: #bcbbbb;
+            position: absolute;
+            top: 38px;
+
+            h2 {
+                color: #2c343e;
+            }
+        }
+    }
+
+}
+
+.darkMOde-header {
+    background: #191919 !important;
 }

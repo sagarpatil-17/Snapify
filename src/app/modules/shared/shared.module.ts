@@ -4,6 +4,7 @@ import { SearchComponent } from './search/search.component';
 import { NavComponent } from './nav/nav.component';
 import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.component';
 import { FooterComponent } from './footer/footer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -16,10 +17,13 @@ import { FooterComponent } from './footer/footer.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     SkeletonLoaderComponent,
-    NavComponent
+    NavComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }

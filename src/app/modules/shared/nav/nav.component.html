@@ -1,4 +1,30 @@
-  <div class="container">
-    <img src="/assets/images/logo.png" alt="Logo">
-    <h1 class="text-white text-2xl font-medium ml-2">Snapify</h1>
+<header [ngClass]="isDarkMode ? 'darkMOde-header':''" *ngIf="isHeader">
+  <div class="container flex justify-between items-center">
+    <div class="logo">
+      <img src="/assets/images/logo.png" alt="Logo">
+      <h1 class="text-2xl font-medium ml-2">Snapify</h1>
+    </div>
+    <!-- <div class="home-search">
+      <form [formGroup]="searchForm">
+        <input type="text" class="w-full px-4 py-2 text-slate-500 bg-gray-50 border focus:outline-none"
+          placeholder="Search for free photos" formControlName="userSearch" (focus)="showSuggestion(true)"
+          (blur)="delayHideSuggestion()" [ngClass]="isSuggestionDiv ? 'rounded-t':'rounded' ">
+        <button class="absolute inset-y-0 right-0 flex items-center px-4 cursor-pointer"
+          [ngClass]="isSuggestionDiv ? 'border-l':'' " (click)="onSearch()">
+          <i class="fa fa-search"></i>
+        </button>
+        <div class="border rounded-b suggestionDiv" *ngIf="isSuggestionDiv">
+          <h2 class="mb-3 text-xl font-medium">Trending Topics</h2>
+          <div class="flex flex-wrap gap-4">
+            <button class="text-slate-500 border rounded px-3 py-1 hover:bg-gray-50 hover:border-gray-400"
+              *ngFor="let keyword of searchKeywords" (click)="onKeyword(keyword)"><i
+                class="fa-solid fa-arrow-trend-up mr-2"></i>{{keyword}}</button>
+          </div>
+        </div>
+      </form>
+    </div> -->
+    <div>
+      <i class="fa fa-adjust text-2xl cursor-pointer" (click)="toggleDarkMode()"></i>
+    </div>
   </div>
+</header>
