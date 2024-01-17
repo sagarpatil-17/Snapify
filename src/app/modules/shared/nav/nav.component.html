@@ -1,4 +1,4 @@
-<header [ngClass]="isDarkMode ? 'darkMOde-header':''" *ngIf="isHeader">
+<header #header [ngClass]="isDarkMode ? 'darkMOde-header':''" *ngIf="isHeader">
   <div class="container flex justify-between items-center">
     <div class="logo">
       <img src="/assets/images/logo.png" alt="Logo">
@@ -24,7 +24,8 @@
       </form>
     </div> -->
     <div>
-      <i class="fa fa-adjust text-2xl cursor-pointer" (click)="toggleDarkMode()"></i>
+      <i class="fa fa-lightbulb text-2xl cursor-pointer" *ngIf="!isDarkMode" (click)="toggleDarkMode()"></i>
+      <i class="fa fa-lightbulb-o text-2xl cursor-pointer" *ngIf="isDarkMode" (click)="toggleDarkMode()"></i>
     </div>
   </div>
 </header>

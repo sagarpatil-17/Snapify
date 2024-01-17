@@ -12,7 +12,7 @@ export class FooterComponent {
 
   public Popular_tags = ['Sports', 'Cool Photos', 'Textures', 'Black Backgrounds'];
   public wallpaper_tags = ['HD Wallpapers', '4k Wallpapers', 'PC Wallpapers', 'Mobile Wallpapers'];
-  public other_tags = ['Happy Birthday Images', 'Cool Wallpapers', 'Travel', 'Gym'];
+  public other_tags = ['Happy Birthday Images', 'Cool Wallpapers', 'Technology', 'Products'];
 
   public onTags(tag: string) {
     this.router.navigate([`search/${tag}`]);

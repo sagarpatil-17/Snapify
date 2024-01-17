@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 export class HomeSearchComponent {
 
   public isSuggestionDiv: boolean = false;
-  public searchKeywords = ['travel', 'workout', 'college', 'motivational', 'road', 'cricket', 'football'];
+  public searchKeywords = ['travel', 'workout', 'college', 'motivational', 'football'];
+  public isDarkMode: boolean = false;
 
   constructor(private router: Router, private cdr: ChangeDetectorRef) { }
 
@@ -37,6 +38,28 @@ export class HomeSearchComponent {
     this.router.navigate([`search/${keyword}`]);
 
     this.cdr.detectChanges();
+  }
+
+  public toggleDarkMode(): void {
+    this.isDarkMode = !this.isDarkMode;
+    this.applyDarkModeStyles();
+  }
+
+  private applyDarkModeStyles(): void {
+    if (this.isDarkMode) {
+      document.body.style.backgroundColor = '#1a1a1a';
+      document.body.style.color = 'white';
+    } else {
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color = '#1a1a1a';
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.isDarkMode) {
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color = '#1a1a1a';
+    }
   }
 
 }

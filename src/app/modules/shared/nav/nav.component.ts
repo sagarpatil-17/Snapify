@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -25,6 +25,11 @@ export class NavComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         if (event.url === '/') {
           this.isHeader = false;
+          if (this.isDarkMode) {
+            document.body.style.backgroundColor = 'white';
+            document.body.style.color = '#1a1a1a';
+            this.isDarkMode = false;
+          }
         } else {
           this.isHeader = true;
         }
