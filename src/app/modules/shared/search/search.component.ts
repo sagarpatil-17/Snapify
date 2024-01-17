@@ -30,6 +30,7 @@ export class SearchComponent {
   private onRouterChange() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+        this.searchText = this.actRoute.snapshot.params['searchText'];
         this.getImages();
       }
     })
